@@ -1,0 +1,127 @@
+h1,
+h2 {
+  text-align: center;
+  font-weight: 300;
+  font-family: "Raleway", sans-serif;
+}
+
+h2 {
+  font-size: 18px;
+  color: #66616d;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.search-form {
+  display: block;
+  margin: 0 auto;
+  max-width: 40%;
+  padding: 15px;
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+  border-color: #6667ab;
+  color: #6667ab;
+}
+
+.btn:hover {
+  background-color: #6667ab;
+  border: #6667ab;
+}
+
+.box {
+  display: block;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: 5px 5px 25px 15px rgba(0, 0, 0, 0.02);
+  max-width: 80%;
+  min-width: min-content;
+  border-radius: 4px;
+  border: #d3d3d4 solid 1px;
+}
+.city {
+  color: #6667ab;
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+}
+.main-display {
+  padding-top: 20px;
+}
+
+.current-icon,
+.current-temperature {
+  color: #6667ab;
+  font-size: 55px;
+  text-align: center;
+}
+
+.current-temperature {
+  font-size: 50px;
+}
+
+.current-icon {
+  font-size: 70px;
+}
+
+.units {
+  font-size: 18px;
+  position: relative;
+  top: -25px;
+  font-weight: 600;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.units:hover {
+  cursor: pointer;
+}
+
+.current-unit {
+  font-weight: bold;
+}
+
+.current-details {
+  font-size: 14px;
+  font-weight: 300;
+  font-family: "Raleway", sans-serif;
+  position: relative;
+  top: 15px;
+}
+.current-state,
+.high-low {
+  text-align: center;
+  font-size: 18px;
+  color: #66616d;
+}
+.current-state {
+  text-align: center;
+  font-size: 18px;
+  color: #66616d;
+  padding: 10px;
+  color: #6667ab;
+}
+
+.upcoming-grid {
+  padding: 20px;
+  text-align: center;
+  border: #66616d solid 0px;
+}
+.days,
+.temps {
+  font-weight: 300;
+  font-size: 14px;
+}
+.days {
+  font-family: "Raleway", sans-serif;
+}
+
+.icons {
+  font-size: 30px;
+  color: #66616d;
+  padding: 15px 0;
+}
