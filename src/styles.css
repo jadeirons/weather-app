@@ -15,6 +15,10 @@ ul {
   padding-left: 0;
 }
 
+a {
+  color: #6667ab;
+}
+
 .search-form {
   display: block;
   margin: 0 auto;
@@ -124,4 +128,12 @@ ul {
   font-size: 30px;
   color: #66616d;
   padding: 15px 0;
+}
+
+.footer {
+  text-align: center;
+  font-weight: 300;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  color: #66616d;
 }
