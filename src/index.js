@@ -39,6 +39,7 @@ function showCurrentWeather(weather) {
   let lon = weather.data.coord.lon;
   let apiKey = "7ad2b873cae54adc90035c81c86bc039";
   let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
+  celsiusTemp = Math.round(weather.data.main.temp);
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
@@ -106,20 +107,23 @@ function callCurrent() {
   navigator.geolocation.getCurrentPosition(getCurrentPosition);
 }
 
-function viewFahrenheit() {
+function viewFahrenheit(event) {
+  event.preventDefault;
   let fahrenheit = document.querySelector("#fahrenheit");
   let celsius = document.querySelector("#celsius");
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "<strong>48</strong>";
+  currentTemp.innerHTML = `<strong>${Math.round((celsiusTemp * 9) / 5 + 32)}
+</strong>`;
   fahrenheit.classList.add("current-unit");
   celsius.classList.remove("current-unit");
 }
 
-function viewCelsius() {
+function viewCelsius(event) {
+  event.preventDefault;
   let celsius = document.querySelector("#celsius");
   let fahrenheit = document.querySelector("#fahrenheit");
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "<strong>9</strong>";
+  currentTemp.innerHTML = `<strong>${celsiusTemp}</strong>`;
   celsius.classList.add("current-unit");
   fahrenheit.classList.remove("current-unit");
 }
@@ -130,14 +134,18 @@ searchForm.addEventListener("submit", searchCity);
 let searchButton = document.querySelector("#button-addon2");
 searchButton.addEventListener("click", searchCity);
 
+let currentLocationBtn = document.querySelector("#current-location-btn");
+currentLocationBtn.addEventListener("click", callCurrent);
+
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", viewCelsius);
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", viewFahrenheit);
 
-let currentLocationBtn = document.querySelector("#current-location-btn");
-currentLocationBtn.addEventListener("click", callCurrent);
+let celsiusTemp = null;
+
+let fahrenheitTemp = null;
 
 let searchValue = document.querySelector("#city-search.value");
 
