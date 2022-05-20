@@ -42,6 +42,8 @@ function showCurrentWeather(weather) {
   let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
   celsiusTemp = Math.round(weather.data.main.temp);
   feelsLikeCelsius = Math.round(weather.data.main.feels_like);
+  highCelsius = Math.round(weather.data.main.temp_max);
+  lowCelsius = Math.round(weather.data.main.temp_min);
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
@@ -113,10 +115,14 @@ function viewFahrenheit(event) {
   let currentTemp = document.querySelector("#current-temp");
   let feelsLike = document.querySelector("#feels-like");
   let feelsLikeUnit = document.querySelector("#fl-unit");
+  let high = document.querySelector("#current-high");
+  let low = document.querySelector("#current-low");
   currentTemp.innerHTML = `<strong>${Math.round((celsiusTemp * 9) / 5 + 32)}
 </strong>`;
   feelsLike.innerHTML = `${Math.round((feelsLikeCelsius * 9) / 5 + 32)}`;
   feelsLikeUnit.innerHTML = "°F";
+  high.innerHTML = `${Math.round((highCelsius * 9) / 5 + 32)}`;
+  low.innerHTML = `${Math.round((lowCelsius * 9) / 5 + 32)}`;
   fahrenheit.classList.add("current-unit");
   celsius.classList.remove("current-unit");
 }
@@ -128,8 +134,12 @@ function viewCelsius(event) {
   let currentTemp = document.querySelector("#current-temp");
   let feelsLike = document.querySelector("#feels-like");
   let feelsLikeUnit = document.querySelector("#fl-unit");
+  let high = document.querySelector("#current-high");
+  let low = document.querySelector("#current-low");
   feelsLike.innerHTML = `${feelsLikeCelsius}`;
   feelsLikeUnit.innerHTML = "°C";
+  high.innerHTML = `${Math.round(highCelsius)}`;
+  low.innerHTML = `${Math.round(lowCelsius)}`;
   currentTemp.innerHTML = `<strong>${celsiusTemp}</strong>`;
   celsius.classList.add("current-unit");
   fahrenheit.classList.remove("current-unit");
@@ -152,3 +162,5 @@ fahrenheit.addEventListener("click", viewFahrenheit);
 
 let celsiusTemp = null;
 let feelsLikeCelsius = null;
+let highCelsius = null;
+let lowCelsius = null;
