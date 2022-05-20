@@ -81,6 +81,7 @@ function showCurrentWeather(weather) {
 
 function searchCity() {
   event.preventDefault();
+
   let city = document.querySelector("#city-search");
   if (city.value.length > 0) {
     let units = "metric";
@@ -89,9 +90,7 @@ function searchCity() {
     axios.get(apiUrl).then(showCurrentWeather);
     let h1 = document.querySelector(".city");
     h1.innerHTML = city.value.toUpperCase();
-  } else {
-    alert("Please enter a city");
-  }
+  } else alert("Please enter a city");
 }
 
 function getCurrentPosition(position) {
