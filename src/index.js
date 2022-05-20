@@ -1,3 +1,30 @@
+function formatTimeDate() {
+  let now = new Date();
+  let hours = now.getHours();
+  let minutes = String(now.getMinutes()).padStart(2, "0");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[now.getDay()];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[now.getMonth()];
+  let date = now.getDate();
+  let year = now.getFullYear();
+  console.log(now);
+  return `${hours}:${minutes} | ${day}, ${month} ${date}, ${year}`;
+}
+
 function showCurrentWeather(weather) {
   let currentTemp = document.querySelector("#current-temp");
   let currentCity = document.querySelector("#city");
@@ -18,34 +45,8 @@ function showCurrentWeather(weather) {
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
-  h2.innerHTML = formatTimeDate(new Date(weather.data.dt * 1000));
+  h2.innerHTML = formatTimeDate(new Date());
   console.log(weather.data);
-
-  function formatTimeDate(timestamp) {
-    let hours = timestamp.getHours();
-    let minutes = String(timestamp.getMinutes()).padStart(2, "0");
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = days[timestamp.getDay()];
-    let months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    let month = months[timestamp.getMonth()];
-    let date = timestamp.getDate();
-    let year = timestamp.getFullYear();
-    console.log(timestamp);
-    return `${hours}:${minutes} | ${day}, ${month} ${date}, ${year}`;
-  }
 }
 
 function searchCity() {
