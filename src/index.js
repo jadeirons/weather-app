@@ -1,5 +1,4 @@
 function formatTimeDate(localTime) {
-  console.log(localTime);
   let h2 = document.querySelector("#h2");
   let now = new Date(localTime.data.date_time);
   let hours = String(now.getHours()).padStart(2, "0");
@@ -36,7 +35,6 @@ function showCurrentWeather(weather) {
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
   let iconCode = weather.data.weather[0].icon;
-  console.log(iconCode);
   let lat = weather.data.coord.lat;
   let lon = weather.data.coord.lon;
   let apiKey = "7ad2b873cae54adc90035c81c86bc039";
@@ -140,5 +138,7 @@ fahrenheit.addEventListener("click", viewFahrenheit);
 
 let currentLocationBtn = document.querySelector("#current-location-btn");
 currentLocationBtn.addEventListener("click", callCurrent);
+
+let searchValue = document.querySelector("#city-search.value");
 
 callCurrent();
