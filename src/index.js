@@ -1,6 +1,7 @@
 function formatTimeDate(localTime) {
+  console.log(localTime);
   let h2 = document.querySelector("#h2");
-  let now = new Date(localTime.data.dateTime);
+  let now = new Date(localTime.data.date_time);
   let hours = String(now.getHours()).padStart(2, "0");
   let minutes = String(now.getMinutes()).padStart(2, "0");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -36,7 +37,8 @@ function showCurrentWeather(weather) {
   let low = document.querySelector("#current-low");
   let lat = weather.data.coord.lat;
   let lon = weather.data.coord.lon;
-  let timeApi = `https://cors-anywhere.herokuapp.com/https://www.timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
+  let apiKey = "7ad2b873cae54adc90035c81c86bc039";
+  let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
