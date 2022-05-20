@@ -60,16 +60,12 @@ a {
 .current-icon,
 .current-temperature {
   color: #6667ab;
-  font-size: 55px;
+  font-size: 50px;
   text-align: center;
 }
 
 .current-temperature {
   font-size: 50px;
-}
-
-.current-icon {
-  font-size: 70px;
 }
 
 .units {

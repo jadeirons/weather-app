@@ -35,6 +35,8 @@ function showCurrentWeather(weather) {
   let currentState = document.querySelector("#current-state");
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
+  let iconCode = weather.data.weather[0].icon;
+  console.log(iconCode);
   let lat = weather.data.coord.lat;
   let lon = weather.data.coord.lon;
   let apiKey = "7ad2b873cae54adc90035c81c86bc039";
@@ -50,6 +52,32 @@ function showCurrentWeather(weather) {
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
   axios.get(timeApi).then(formatTimeDate);
+  updateIcon(iconCode);
+  function updateIcon(iconCode) {
+    let icon = document.querySelector("#icon");
+    if (iconCode === "01d") {
+      icon.setAttribute("class", "fa-solid fa-sun");
+    } else if (iconCode === "02d") {
+      icon.setAttribute("class", "fa-solid fa-cloud-sun");
+    } else if (iconCode === "03d" || "03n" || "04d" || "04n") {
+      icon.setAttribute("class", "fa-solid fa-cloud");
+    } else if (iconCode === "09d" || "09n") {
+      icon.setAttribute("class", "fa-solid fa-cloud-rain");
+    } else if (iconCode === "10d" || "10n") {
+      icon.setAttribute("class", "fa-solid fa-cloud-showers-heavy");
+    } else if (iconCode === "11d" || "11n") {
+      icon.setAttribute("class", "fa-solid fa-cloud-bolt");
+    } else if (iconCode === "13d" || "13n") {
+      icon.setAttribute("class", "fa-solid fa-snowflake");
+    } else if (iconCode === "50d" || "50n") {
+      icon.setAttribute("class", "fa-solid fa-smog");
+    } else if (iconCode === "01n") {
+      icon.setAttribute("class", "fa-solid fa-moon");
+    } else if (iconCode === "02n" || "50n") {
+      icon.setAttribute("class", "fa-solid fa-cloud-moon");
+    }
+  }
+  console.log(weather);
 }
 
 function searchCity() {
