@@ -1,7 +1,7 @@
 function formatTimeDate(localTime) {
   let h2 = document.querySelector("#h2");
   let now = new Date(localTime.data.dateTime);
-  let hours = now.getHours();
+  let hours = String(now.getHours()).padStart(2, "0");
   let minutes = String(now.getMinutes()).padStart(2, "0");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[now.getDay()];
