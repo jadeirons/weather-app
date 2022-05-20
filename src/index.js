@@ -148,5 +148,3 @@ let celsiusTemp = null;
 let fahrenheitTemp = null;
 
 let searchValue = document.querySelector("#city-search.value");
-
-callCurrent();
