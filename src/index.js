@@ -26,6 +26,7 @@ function formatTimeDate(localTime) {
 }
 
 function showCurrentWeather(weather) {
+  console.log(weather);
   let currentTemp = document.querySelector("#current-temp");
   let currentCity = document.querySelector("#city");
   let feelsLike = document.querySelector("#feels-like");
@@ -40,13 +41,14 @@ function showCurrentWeather(weather) {
   let apiKey = "7ad2b873cae54adc90035c81c86bc039";
   let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
   celsiusTemp = Math.round(weather.data.main.temp);
+  feelsLikeCelsius = Math.round(weather.data.main.feels_like);
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
+  feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
   currentCity.innerHTML = weather.data.name.toUpperCase();
   humidity.innerHTML = weather.data.main.humidity;
   wind.innerHTML = Math.round(weather.data.wind.speed);
-  feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
@@ -76,12 +78,10 @@ function showCurrentWeather(weather) {
       icon.setAttribute("class", "fa-solid fa-cloud-moon");
     }
   }
-  console.log(weather);
 }
 
-function searchCity() {
+function searchCity(event) {
   event.preventDefault();
-
   let city = document.querySelector("#city-search");
   if (city.value.length > 0) {
     let units = "metric";
@@ -111,8 +111,12 @@ function viewFahrenheit(event) {
   let fahrenheit = document.querySelector("#fahrenheit");
   let celsius = document.querySelector("#celsius");
   let currentTemp = document.querySelector("#current-temp");
+  let feelsLike = document.querySelector("#feels-like");
+  let feelsLikeUnit = document.querySelector("#fl-unit");
   currentTemp.innerHTML = `<strong>${Math.round((celsiusTemp * 9) / 5 + 32)}
 </strong>`;
+  feelsLike.innerHTML = `${Math.round((feelsLikeCelsius * 9) / 5 + 32)}`;
+  feelsLikeUnit.innerHTML = "°F";
   fahrenheit.classList.add("current-unit");
   celsius.classList.remove("current-unit");
 }
@@ -122,6 +126,10 @@ function viewCelsius(event) {
   let celsius = document.querySelector("#celsius");
   let fahrenheit = document.querySelector("#fahrenheit");
   let currentTemp = document.querySelector("#current-temp");
+  let feelsLike = document.querySelector("#feels-like");
+  let feelsLikeUnit = document.querySelector("#fl-unit");
+  feelsLike.innerHTML = `${feelsLikeCelsius}`;
+  feelsLikeUnit.innerHTML = "°C";
   currentTemp.innerHTML = `<strong>${celsiusTemp}</strong>`;
   celsius.classList.add("current-unit");
   fahrenheit.classList.remove("current-unit");
@@ -143,7 +151,4 @@ let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", viewFahrenheit);
 
 let celsiusTemp = null;
-
-let fahrenheitTemp = null;
-
-let searchValue = document.querySelector("#city-search.value");
+let feelsLikeCelsius = null;
