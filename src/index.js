@@ -1,5 +1,6 @@
-function formatTimeDate() {
-  let now = new Date();
+function formatTimeDate(localTime) {
+  let h2 = document.querySelector("#h2");
+  let now = new Date(localTime.data.dateTime);
   let hours = now.getHours();
   let minutes = String(now.getMinutes()).padStart(2, "0");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -21,8 +22,7 @@ function formatTimeDate() {
   let month = months[now.getMonth()];
   let date = now.getDate();
   let year = now.getFullYear();
-  console.log(now);
-  return `${hours}:${minutes} | ${day}, ${month} ${date}, ${year}`;
+  h2.innerHTML = `${hours}:${minutes} | ${day}, ${month} ${date}, ${year}`;
 }
 
 function showCurrentWeather(weather) {
@@ -34,7 +34,9 @@ function showCurrentWeather(weather) {
   let currentState = document.querySelector("#current-state");
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
-  let h2 = document.querySelector("#h2");
+  let lat = weather.data.coord.lat;
+  let lon = weather.data.coord.lon;
+  let timeApi = `https://cors-anywhere.herokuapp.com/https://www.timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
@@ -45,8 +47,7 @@ function showCurrentWeather(weather) {
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
-  h2.innerHTML = formatTimeDate(new Date());
-  console.log(weather.data);
+  axios.get(timeApi).then(formatTimeDate);
 }
 
 function searchCity() {
