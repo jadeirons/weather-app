@@ -91,8 +91,6 @@ function searchCity(event) {
     let apiKey = "1979bc82187db3756ece8eeb6f265da0";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=${units}&appid=${apiKey}`;
     axios.get(apiUrl).then(showCurrentWeather);
-    let h1 = document.querySelector(".city");
-    h1.innerHTML = city.value.toUpperCase();
   } else alert("Please enter a city");
 }
 
