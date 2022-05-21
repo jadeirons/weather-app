@@ -73,7 +73,9 @@ function showCurrentWeather(weather) {
     weather.data.main.temp
   )}</strong>`;
   feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
-  currentCity.innerHTML = weather.data.name.toUpperCase();
+  currentCity.innerHTML = `${weather.data.name.toUpperCase()}, ${
+    weather.data.sys.country
+  }`;
   humidity.innerHTML = weather.data.main.humidity;
   wind.innerHTML = Math.round(weather.data.wind.speed);
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
