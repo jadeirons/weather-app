@@ -111,13 +111,18 @@ a {
   text-align: center;
   border: #66616d solid 0px;
 }
-.days,
-.temps {
+
+.forecast-day {
+  font-family: "Raleway", sans-serif;
+}
+.forecast-day,
+.forecast-temp-high,
+.forecast-temp-low {
   font-weight: 300;
   font-size: 14px;
 }
-.days {
-  font-family: "Raleway", sans-serif;
+.forecast-temp-high {
+  font-weight: 700;
 }
 
 .icons {
