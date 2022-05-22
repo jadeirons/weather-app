@@ -50,6 +50,15 @@ function updateIcon(iconCode) {
   }
 }
 
+function getLocalTime(coordinates) {
+  console.log(coordinates);
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiKey = "7ad2b873cae54adc90035c81c86bc039";
+  let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
+  axios.get(timeApi).then(formatTimeDate);
+}
+
 function showCurrentWeather(weather) {
   console.log(weather);
   let currentTemp = document.querySelector("#current-temp");
@@ -60,10 +69,6 @@ function showCurrentWeather(weather) {
   let currentState = document.querySelector("#current-state");
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
-  let lat = weather.data.coord.lat;
-  let lon = weather.data.coord.lon;
-  let apiKey = "7ad2b873cae54adc90035c81c86bc039";
-  let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
   iconCode = weather.data.weather[0].icon;
   celsiusTemp = Math.round(weather.data.main.temp);
   feelsLikeCelsius = Math.round(weather.data.main.feels_like);
@@ -81,13 +86,14 @@ function showCurrentWeather(weather) {
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
-  axios.get(timeApi).then(formatTimeDate);
+  getLocalTime(weather.data.coord);
   updateIcon(iconCode);
+  getForecast(weather.data.coord);
 }
 
-function showForecast() {
+function showForecast(forecast) {
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Mon", "Tue", "WED", "THU", "FRI"];
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
     forecastHTML =
@@ -105,6 +111,16 @@ function showForecast() {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+  console.log(forecast.data.daily);
+}
+
+function getForecast(coordinates) {
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let unit = "metric";
+  let ForecastApiKey = "1979bc82187db3756ece8eeb6f265da0";
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${unit}&appid=${ForecastApiKey}`;
+  axios.get(forecastApiUrl).then(showForecast);
 }
 
 function searchCity(event) {
@@ -188,5 +204,3 @@ let feelsLikeCelsius = null;
 let highCelsius = null;
 let lowCelsius = null;
 let iconCode = null;
-
-showForecast();
