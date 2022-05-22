@@ -85,6 +85,28 @@ function showCurrentWeather(weather) {
   updateIcon(iconCode);
 }
 
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["MON", "TUE", "WED", "THU", "FRI"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col-2 upcoming-grid">
+        <div class="forecast-day">MON</div>
+        <i class="fa-solid fa-cloud-bolt icons"></i>
+        <div class="weather-forecast-temperatures">
+          <span class="forecast-temp-high"> 11°C</span>
+          <span class="forecast-temp-low"> | 5°C </span>
+        </div>
+      </div>
+    `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
@@ -166,3 +188,5 @@ let feelsLikeCelsius = null;
 let highCelsius = null;
 let lowCelsius = null;
 let iconCode = null;
+
+showForecast();
