@@ -87,14 +87,14 @@ function showCurrentWeather(weather) {
 
 function showForecast() {
   let forecastElement = document.querySelector("#forecast");
-  let days = ["MON", "TUE", "WED", "THU", "FRI"];
+  let days = ["Mon", "Tue", "WED", "THU", "FRI"];
   let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
       `
     <div class="col-2 upcoming-grid">
-        <div class="forecast-day">MON</div>
+        <div class="forecast-day">${day.toUpperCase()}</div>
         <i class="fa-solid fa-cloud-bolt icons"></i>
         <div class="weather-forecast-temperatures">
           <span class="forecast-temp-high"> 11°C</span>
