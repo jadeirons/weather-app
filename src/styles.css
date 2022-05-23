@@ -20,6 +20,10 @@ ul {
   text-align: left;
 }
 
+a {
+  color: #6667ab;
+}
+
 .container {
   padding-top: 15px;
 }
@@ -60,10 +64,7 @@ ul {
 .current-temperature,
 .current-state {
   color: #6667ab;
-}
-
-.city {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .current-icon,
@@ -74,7 +75,7 @@ ul {
 .unit {
   font-size: 18px;
   position: relative;
-  top: -30px;
+  top: -25px;
 }
 
 .current-details {
@@ -86,7 +87,6 @@ ul {
 .current-state {
   font-size: 18px;
   padding: 10px;
-  font-weight: 500;
 }
 
 .current-high {

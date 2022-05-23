@@ -110,7 +110,9 @@ function showForecast(forecast) {
         forecastHTML +
         `
     <div class="col-2 upcoming-grid">
-        <div class="forecast-day">${formatDays(forecastDays.dt)}</div>
+        <div class="forecast-day">${formatDays(
+          forecastDays.dt
+        ).toUpperCase()}</div>
         <i class=" icons ${updateIcon(forecastDays.weather[0].icon)}"></i>
         <div class="weather-forecast-temperatures">
           <span class="forecast-temp-high"> ${Math.round(
@@ -148,9 +150,7 @@ function showCurrentWeather(weather) {
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
   iconCode = weather.data.weather[0].icon;
-  currentTemp.innerHTML = `<strong>${Math.round(
-    weather.data.main.temp
-  )}</strong>`;
+  currentTemp.innerHTML = `${Math.round(weather.data.main.temp)}`;
   feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
   currentCity.innerHTML = `${weather.data.name.toUpperCase()}, ${
     weather.data.sys.country
