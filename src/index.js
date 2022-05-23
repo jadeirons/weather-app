@@ -25,16 +25,29 @@ function formatTimeDate(localTime) {
   h2.innerHTML = `${hours}:${minutes} | ${day}, ${month} ${date}, ${year}`;
 }
 
+function getLocalTime(coordinates) {
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiKey = "7ad2b873cae54adc90035c81c86bc039";
+  let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
+  axios.get(timeApi).then(formatTimeDate);
+}
+
+function formatDays(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function updateIcon(iconCode) {
   console.log(iconCode);
   if (iconCode === "01d") {
     return "fa-solid fa-sun";
   }
-
   if (iconCode === "02d") {
     return "fa-solid fa-cloud-sun";
   }
-
   if (iconCode === "03d") {
     return "fa-solid fa-cloud";
   }
@@ -88,54 +101,6 @@ function updateIcon(iconCode) {
   }
 }
 
-function getLocalTime(coordinates) {
-  let lat = coordinates.lat;
-  let lon = coordinates.lon;
-  let apiKey = "7ad2b873cae54adc90035c81c86bc039";
-  let timeApi = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${lon}`;
-  axios.get(timeApi).then(formatTimeDate);
-}
-
-function showCurrentWeather(weather) {
-  console.log(weather);
-  let icon = document.querySelector("#icon");
-  let currentTemp = document.querySelector("#current-temp");
-  let currentCity = document.querySelector("#city");
-  let feelsLike = document.querySelector("#feels-like");
-  let humidity = document.querySelector("#humidity");
-  let wind = document.querySelector("#wind");
-  let currentState = document.querySelector("#current-state");
-  let high = document.querySelector("#current-high");
-  let low = document.querySelector("#current-low");
-  iconCode = weather.data.weather[0].icon;
-  celsiusTemp = Math.round(weather.data.main.temp);
-  feelsLikeCelsius = Math.round(weather.data.main.feels_like);
-  highCelsius = Math.round(weather.data.main.temp_max);
-  lowCelsius = Math.round(weather.data.main.temp_min);
-  currentTemp.innerHTML = `<strong>${Math.round(
-    weather.data.main.temp
-  )}</strong>`;
-  feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
-  currentCity.innerHTML = `${weather.data.name.toUpperCase()}, ${
-    weather.data.sys.country
-  }`;
-  humidity.innerHTML = weather.data.main.humidity;
-  wind.innerHTML = Math.round(weather.data.wind.speed);
-  currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
-  high.innerHTML = Math.round(weather.data.main.temp_max);
-  low.innerHTML = Math.round(weather.data.main.temp_min);
-  icon.innerHTML = `<i class="${updateIcon(iconCode)}"></i>`;
-  getLocalTime(weather.data.coord);
-  getForecast(weather.data.coord);
-}
-
-function formatDays(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[day];
-}
-
 function showForecast(forecast) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
@@ -177,9 +142,43 @@ function getForecast(coordinates) {
   axios.get(forecastApiUrl).then(showForecast);
 }
 
+function showCurrentWeather(weather) {
+  console.log(weather);
+  let icon = document.querySelector("#icon");
+  let currentTemp = document.querySelector("#current-temp");
+  let currentCity = document.querySelector("#city");
+  let feelsLike = document.querySelector("#feels-like");
+  let humidity = document.querySelector("#humidity");
+  let wind = document.querySelector("#wind");
+  let currentState = document.querySelector("#current-state");
+  let high = document.querySelector("#current-high");
+  let low = document.querySelector("#current-low");
+  iconCode = weather.data.weather[0].icon;
+  celsiusTemp = Math.round(weather.data.main.temp);
+  feelsLikeCelsius = Math.round(weather.data.main.feels_like);
+  highCelsius = Math.round(weather.data.main.temp_max);
+  lowCelsius = Math.round(weather.data.main.temp_min);
+  currentTemp.innerHTML = `<strong>${Math.round(
+    weather.data.main.temp
+  )}</strong>`;
+  feelsLike.innerHTML = Math.round(weather.data.main.feels_like);
+  currentCity.innerHTML = `${weather.data.name.toUpperCase()}, ${
+    weather.data.sys.country
+  }`;
+  humidity.innerHTML = weather.data.main.humidity;
+  wind.innerHTML = Math.round(weather.data.wind.speed);
+  currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
+  high.innerHTML = Math.round(weather.data.main.temp_max);
+  low.innerHTML = Math.round(weather.data.main.temp_min);
+  icon.innerHTML = `<i class="${updateIcon(iconCode)}"></i>`;
+  getLocalTime(weather.data.coord);
+  getForecast(weather.data.coord);
+}
+
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
+  city.value = city.value.trim();
   if (city.value.length > 0) {
     let units = "metric";
     let apiKey = "1979bc82187db3756ece8eeb6f265da0";
@@ -257,4 +256,3 @@ let celsiusTemp = null;
 let feelsLikeCelsius = null;
 let highCelsius = null;
 let lowCelsius = null;
-let iconCode = null;
