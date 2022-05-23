@@ -46,32 +46,30 @@
           </div>
 
           <button
-            class="btn btn-outline-primary"
+            class="btn btn-outline-primary btn-sm"
             type="button"
             id="current-location-btn"
           >
             Use current location
           </button>
-        
+</div>
       </form>
       <div class="box">
         <h1>WEATHER IN <span class="city" id="city"></span></h1>
         <h2 id="h2">
         </h2>
-        <div class="container main-display">
+        <div class="container">
           <div class="row">
             <div class="col-4 current-icon" >
               <i id="icon" ></i>
             </div>
             <div class="col-4 current-temperature">
               <span id="current-temp"><strong></strong
-              ></span><span class="units" id="units"
-                ><span id="celsius">°C</span></span
-              >
+              ></span><span class="unit">°C</span>
             </div>
             <div class="col-4 current-details">
               <ul>
-                <li>Feels like: <span id=feels-like></span><span id="fl-unit">°C</span></li>
+                <li>Feels like: <span id=feels-like></span><span>°C</span></li>
                 <li>Humidity: <span id=humidity></span>%</li>
                 <li>Wind: <span id=wind></span>km/hr</li>
               </ul>
@@ -79,7 +77,7 @@
           </div>
         </div>
         <div class="current-state" id="current-state"></div>
-        <div class="high-low"><strong>HIGH: <span id="current-high"></span>°C</strong> | LOW: <span id="current-low"></span>°C</div>
+        <div class="high-low"><span class="current-high">HIGH: <span id="current-high"></span>°C</span> | LOW: <span id="current-low"></span>°C</div>
         <hr />
         <span id = "forecast">
       </span>

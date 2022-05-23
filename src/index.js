@@ -41,7 +41,6 @@ function formatDays(timestamp) {
 }
 
 function updateIcon(iconCode) {
-  console.log(iconCode);
   if (iconCode === "01d") {
     return "fa-solid fa-sun";
   }
@@ -105,7 +104,6 @@ function showForecast(forecast) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let forecastDays = forecast.data.daily;
-  console.log(forecast.data.daily);
   forecastDays.forEach(function (forecastDays, index) {
     if (index < 5) {
       forecastHTML =
@@ -114,7 +112,6 @@ function showForecast(forecast) {
     <div class="col-2 upcoming-grid">
         <div class="forecast-day">${formatDays(forecastDays.dt)}</div>
         <i class=" icons ${updateIcon(forecastDays.weather[0].icon)}"></i>
-        
         <div class="weather-forecast-temperatures">
           <span class="forecast-temp-high"> ${Math.round(
             forecastDays.temp.max
@@ -129,8 +126,6 @@ function showForecast(forecast) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  updateIcon(iconCode);
-  console.log(forecast.data.daily);
 }
 
 function getForecast(coordinates) {
@@ -143,7 +138,6 @@ function getForecast(coordinates) {
 }
 
 function showCurrentWeather(weather) {
-  console.log(weather);
   let icon = document.querySelector("#icon");
   let currentTemp = document.querySelector("#current-temp");
   let currentCity = document.querySelector("#city");
@@ -154,7 +148,6 @@ function showCurrentWeather(weather) {
   let high = document.querySelector("#current-high");
   let low = document.querySelector("#current-low");
   iconCode = weather.data.weather[0].icon;
-
   currentTemp.innerHTML = `<strong>${Math.round(
     weather.data.main.temp
   )}</strong>`;
