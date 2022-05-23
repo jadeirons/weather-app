@@ -118,9 +118,7 @@ function showForecast(forecast) {
         `
     <div class="col-2 upcoming-grid">
         <div class="forecast-day">${formatDays(forecastDays.dt)}</div>
-        <i class=" icons ${updateIcon(
-          forecast.data.daily[0].weather.icon
-        )}"></i>
+        <i class=" icons ${updateIcon(forecastDays.weather[0].icon)}"></i>
         
         <div class="weather-forecast-temperatures">
           <span class="forecast-temp-high"> ${Math.round(
