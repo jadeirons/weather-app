@@ -26,34 +26,64 @@ function formatTimeDate(localTime) {
 }
 
 function updateIcon(iconCode) {
+  console.log(iconCode);
   if (iconCode === "01d") {
     return "fa-solid fa-sun";
   }
+
   if (iconCode === "02d") {
     return "fa-solid fa-cloud-sun";
   }
-  if (iconCode === "03d" || "03n" || "04d" || "04n") {
+
+  if (iconCode === "03d") {
     return "fa-solid fa-cloud";
   }
-  if (iconCode === "09d" || "09n") {
+  if (iconCode === "03n") {
+    return "fa-solid fa-cloud";
+  }
+  if (iconCode === "04d") {
+    return "fa-solid fa-cloud";
+  }
+  if (iconCode === "04n") {
+    return "fa-solid fa-cloud";
+  }
+  if (iconCode === "09d") {
     return "fa-solid fa-cloud-rain";
   }
-  if (iconCode === "10d" || "10n") {
+  if (iconCode === "09n") {
+    return "fa-solid fa-cloud-rain";
+  }
+  if (iconCode === "10d") {
     return "fa-solid fa-cloud-showers-heavy";
   }
-  if (iconCode === "11d" || "11n") {
+  if (iconCode === "10n") {
+    return "fa-solid fa-cloud-showers-heavy";
+  }
+  if (iconCode === "11d") {
     return "fa-solid fa-cloud-bolt";
   }
-  if (iconCode === "13d" || "13n") {
+  if (iconCode === "11n") {
+    return "fa-solid fa-cloud-bolt";
+  }
+  if (iconCode === "13d") {
     return "fa-solid fa-snowflake";
   }
-  if (iconCode === "50d" || "50n") {
+  if (iconCode === "13n") {
+    return "fa-solid fa-snowflake";
+  }
+  if (iconCode === "50d") {
+    return "fa-solid fa-smog";
+  }
+  if (iconCode === "50n") {
     return "fa-solid fa-smog";
   }
   if (iconCode === "01n") {
     return "fa-solid fa-moon";
   }
-  if (iconCode === "02n" || "50n") {
+  if (iconCode === "02n") {
+    return "fa-solid fa-cloud-moon";
+  }
+  if (iconCode === "50n") {
     return "fa-solid fa-cloud-moon";
   }
 }
