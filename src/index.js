@@ -26,32 +26,39 @@ function formatTimeDate(localTime) {
 }
 
 function updateIcon(iconCode) {
-  let icon = document.querySelector("#icon");
   if (iconCode === "01d") {
-    icon.setAttribute("class", "fa-solid fa-sun");
-  } else if (iconCode === "02d") {
-    icon.setAttribute("class", "fa-solid fa-cloud-sun");
-  } else if (iconCode === "03d" || "03n" || "04d" || "04n") {
-    icon.setAttribute("class", "fa-solid fa-cloud");
-  } else if (iconCode === "09d" || "09n") {
-    icon.setAttribute("class", "fa-solid fa-cloud-rain");
-  } else if (iconCode === "10d" || "10n") {
-    icon.setAttribute("class", "fa-solid fa-cloud-showers-heavy");
-  } else if (iconCode === "11d" || "11n") {
-    icon.setAttribute("class", "fa-solid fa-cloud-bolt");
-  } else if (iconCode === "13d" || "13n") {
-    icon.setAttribute("class", "fa-solid fa-snowflake");
-  } else if (iconCode === "50d" || "50n") {
-    icon.setAttribute("class", "fa-solid fa-smog");
-  } else if (iconCode === "01n") {
-    icon.setAttribute("class", "fa-solid fa-moon");
-  } else if (iconCode === "02n" || "50n") {
-    icon.setAttribute("class", "fa-solid fa-cloud-moon");
+    return "fa-solid fa-sun";
+  }
+  if (iconCode === "02d") {
+    return "fa-solid fa-cloud-sun";
+  }
+  if (iconCode === "03d" || "03n" || "04d" || "04n") {
+    return "fa-solid fa-cloud";
+  }
+  if (iconCode === "09d" || "09n") {
+    return "fa-solid fa-cloud-rain";
+  }
+  if (iconCode === "10d" || "10n") {
+    return "fa-solid fa-cloud-showers-heavy";
+  }
+  if (iconCode === "11d" || "11n") {
+    return "fa-solid fa-cloud-bolt";
+  }
+  if (iconCode === "13d" || "13n") {
+    return "fa-solid fa-snowflake";
+  }
+  if (iconCode === "50d" || "50n") {
+    return "fa-solid fa-smog";
+  }
+  if (iconCode === "01n") {
+    return "fa-solid fa-moon";
+  }
+  if (iconCode === "02n" || "50n") {
+    return "fa-solid fa-cloud-moon";
   }
 }
 
 function getLocalTime(coordinates) {
-  console.log(coordinates);
   let lat = coordinates.lat;
   let lon = coordinates.lon;
   let apiKey = "7ad2b873cae54adc90035c81c86bc039";
@@ -61,6 +68,7 @@ function getLocalTime(coordinates) {
 
 function showCurrentWeather(weather) {
   console.log(weather);
+  let icon = document.querySelector("#icon");
   let currentTemp = document.querySelector("#current-temp");
   let currentCity = document.querySelector("#city");
   let feelsLike = document.querySelector("#feels-like");
@@ -86,31 +94,49 @@ function showCurrentWeather(weather) {
   currentState.innerHTML = weather.data.weather[0].main.toUpperCase();
   high.innerHTML = Math.round(weather.data.main.temp_max);
   low.innerHTML = Math.round(weather.data.main.temp_min);
+  icon.innerHTML = `<i class="${updateIcon(iconCode)}"></i>`;
   getLocalTime(weather.data.coord);
-  updateIcon(iconCode);
   getForecast(weather.data.coord);
+}
+
+function formatDays(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
 }
 
 function showForecast(forecast) {
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  let forecastDays = forecast.data.daily;
+  console.log(forecast.data.daily);
+  forecastDays.forEach(function (forecastDays, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
     <div class="col-2 upcoming-grid">
-        <div class="forecast-day">${day.toUpperCase()}</div>
-        <i class="fa-solid fa-cloud-bolt icons"></i>
+        <div class="forecast-day">${formatDays(forecastDays.dt)}</div>
+        <i class=" icons ${updateIcon(
+          forecast.data.daily[0].weather.icon
+        )}"></i>
+        
         <div class="weather-forecast-temperatures">
-          <span class="forecast-temp-high"> 11°C</span>
-          <span class="forecast-temp-low"> | 5°C </span>
+          <span class="forecast-temp-high"> ${Math.round(
+            forecastDays.temp.max
+          )}°C</span>
+          <span class="forecast-temp-low"> | ${Math.round(
+            forecastDays.temp.min
+          )}°C </span>
         </div>
       </div>
     `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+  updateIcon(iconCode);
   console.log(forecast.data.daily);
 }
 
